@@ -1,0 +1,28 @@
+parameters:
+
+  meta.config:
+    title: 'Eureka'
+    charset: 'utf-8'
+
+    app:
+      name_short: ''
+      name_full: 'Eureka Web App'
+
+    description: 'This application is an template web application based on Eureka Framework component'
+    keywords:    'eureka, web, application, template, component, php, framework'
+    author:      'Romain Cottard'
+    version:     '%app.version%'
+
+    copyright:
+      year: 'now'
+      name: 'velkuns'
+
+    footer:
+      links: [ ]
+
+    #~ Other meta data
+
+    social:
+      facebook: '#'
+      twitter: 'https://twitter.com/velkuns'
+      feed: '#'

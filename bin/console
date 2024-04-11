@@ -1,0 +1,49 @@
+#!/usr/bin/env php
+<?php
+declare(strict_types=1);
+
+/*
+ * Copyright (c) Romain Cottard
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+use Eureka\Kernel\Console\Application\Application;
+use Eureka\Kernel\Console\Kernel;
+use Lcobucci\Clock\SystemClock;
+use Psr\Container\NotFoundExceptionInterface;
+use Psr\Log\NullLogger;
+
+//~ Define Loader & add main classes for config
+require_once __DIR__ . '/../vendor/autoload.php';
+
+try {
+    $root   = (string) realpath(__DIR__ . '/..');
+    $env    = (string) getenv('EKA_ENV') ?: 'dev';
+    $debug  = (bool) (getenv('EKA_DEBUG') ?: ($env === 'dev'));
+    $kernel = new Kernel($root, $env, $debug);
+
+    $console = new Application(SystemClock::fromSystemTimezone(), $argv, container: $kernel->getContainer());
+    $console
+        ->setBaseNamespaces(
+            [
+                'Application\Script',
+                'Eureka\Component\Deployer\Script',
+                'Eureka\Component',
+            ]
+        )
+        ->setLogger(new NullLogger())
+    ;
+
+    $console->before();
+    $console->run();
+    $console->after();
+    $console->terminate();
+} catch (NotFoundExceptionInterface $exception) {
+    echo 'Exception: ' . $exception->getMessage() . PHP_EOL;
+    exit(1);
+} catch (\Exception $exception) {
+    echo 'Exception: ' . $exception->getMessage() . PHP_EOL;
+    exit(1);
+}

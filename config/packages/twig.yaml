@@ -1,0 +1,37 @@
+parameters:
+  twig.template.name: 'bootswatch'
+
+  twig.cache.dir: '%kernel.directory.cache%/%kernel.environment%/twig'
+
+  twig.paths:
+    app:    '%kernel.directory.root%/templates/%twig.template.name%/app'
+    common: '%kernel.directory.root%/templates/%twig.template.name%/common'
+    layout: '%kernel.directory.root%/templates/%twig.template.name%/layout'
+    macro:  '%kernel.directory.root%/templates/%twig.template.name%/macro'
+    mail:   '%kernel.directory.root%/templates/%twig.template.name%/mail'
+
+services:
+
+  _defaults:
+    autowire: true
+
+  Twig\Loader\FilesystemLoader: ~
+
+  Twig\Environment:
+    arguments:
+      $loader: '@Twig\Loader\FilesystemLoader'
+      $options:
+        cache: '%twig.cache.dir%'
+        debug: '%kernel.debug%'
+
+  twig:
+    alias: 'Twig\Environment'
+
+  Application\Service\Twig\TwigConfigurator:
+    arguments:
+      $twigPaths:       '%twig.paths%'
+      $webAssetsPath:   '%app.web.assets.path%'
+
+  Application\Service\Twig\TwigCacheWarmer:
+    tags:
+      - { name: 'kernel.cache_warmer', priority: 0 }

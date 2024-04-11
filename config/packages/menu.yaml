@@ -1,0 +1,7 @@
+parameters:
+
+  menu.cookie_state_name: ''
+
+  menu.config.left: [ ]
+
+  menu.config.right: [ ]

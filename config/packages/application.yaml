@@ -1,0 +1,48 @@
+parameters:
+  app.cookie.domain:   '.eureka.fr'
+  app.cookie.path:     '/'
+  app.cookie.samesite: 'Lax'  # None, Lax ou Strict
+  app.cookie.httponly: true   # of false if http is used
+  app.cookie.secure:   false  # set to true if app use https
+
+  app.web.assets.path: '%kernel.directory.root%/web/assets'
+
+services:
+  _defaults:
+    autowire: true
+    bind:
+      $connectionName:          'common'
+
+  #~ Application source code except controllers & middleware (see packages/middleware.yaml)
+  Application\:
+    resource: '../../src/*'
+    exclude: '../../src/{Controller,Middleware,Domain}'
+
+  #~ Application controllers
+  Application\Controller\Web\:
+    resource: '../../src/Controller/Web'
+    public: true # services called in ControllerMiddleware
+    calls:
+      - [ 'setTwig', [ '@twig' ] ]
+      - [ 'setRouter', [ '@router' ] ]
+      - [ 'setResponseFactory', [ '@response_factory' ] ]
+      - [ 'setRequestFactory', [ '@request_factory' ] ]
+      - [ 'setServerRequestFactory', [ '@server_request_factory' ] ]
+      - [ 'setStreamFactory', [ '@stream_factory' ] ]
+      - [ 'setUriFactory', [ '@uri_factory' ] ]
+      - [ 'setSession', [ '@session' ] ]
+      - [ 'setMenuConfig', [ '%menu.config.left%', '%menu.cookie_state_name%', '%menu.config.right%' ] ]
+      - [ 'setMetaConfig', [ '%meta.config%' ] ]
+      - [ 'setRootDirectory', [ '%kernel.directory.root%' ] ]
+
+  #~ Application Domain
+  Application\Domain\:
+    resource: '../../src/Domain'
+
+  Application\Service\CookieService:
+    arguments:
+      $domain:     '%app.cookie.domain%'
+      $path:       '%app.cookie.path%'
+      $isHttpOnly: '%app.cookie.httponly%'
+      $isSecure:   '%app.cookie.secure%'
+      $sameSite:   '%app.cookie.samesite%'

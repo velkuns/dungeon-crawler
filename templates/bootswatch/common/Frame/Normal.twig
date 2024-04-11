@@ -1,0 +1,13 @@
+{% extends '@layout/Main.twig' %}
+
+{% block page %}
+
+    {% include '@common/Header/Header.twig' %}
+
+    <div class="container flex-shrink-0">
+        {% block content %}{% endblock %}
+    </div>
+
+    {% include '@common/Footer/Footer.twig'%}
+
+{% endblock %}

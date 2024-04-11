@@ -1,0 +1,35 @@
+parameters:
+
+  app.middleware:
+    timeLogger:     'Eureka\Kernel\Http\Middleware\ResponseTimeLoggerMiddleware'
+    errorWeb:       'Eureka\Kernel\Http\Middleware\ErrorMiddleware'
+    twig:           'Application\Middleware\TwigMiddleware'
+    router:         'Eureka\Kernel\Http\Middleware\RouterMiddleware'
+    rateLimiter:    'Eureka\Kernel\Http\Middleware\RateLimiterMiddleware'
+    controller:     'Eureka\Kernel\Http\Middleware\ControllerMiddleware'
+
+services:
+  _defaults:
+    autowire: true
+    public:   true
+    bind:
+      $applicationName: '%app.name%'
+      $cache:           '@app.cache.default'
+
+  #~ Global Kernel Services Middleware
+  Eureka\Kernel\Http\Middleware\:
+    resource: '../../vendor/eureka/kernel-http/src/Middleware'
+
+  #~ Global Application Services Middleware
+  Application\Middleware\:
+    resource: '../../src/Middleware'
+
+  Application\Middleware\TwigMiddleware:
+    arguments:
+      $twigPaths:     '%twig.paths%'
+      $webAssetsPath: '%app.web.assets.path%'
+
+  #~ Error middleware for classic web application
+  Eureka\Kernel\Http\Middleware\ErrorMiddleware:
+    arguments:
+      $errorController: '@Application\Controller\Web\Error\ErrorController'

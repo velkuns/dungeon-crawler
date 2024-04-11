@@ -1,0 +1,10 @@
+# For route with log-in needed, add following parameter in defaults: "authenticationRequired: true"
+# ======================================================================================================================
+# =                                                 WEB                                                                =
+# ======================================================================================================================
+home:
+    path:       /
+    controller: Application\Controller\Web\Home\HomeController::index
+    methods:    [GET]
+    defaults:
+        authenticationRequired: false

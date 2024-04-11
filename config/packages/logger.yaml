@@ -1,0 +1,9 @@
+services:
+  _defaults:
+    autoconfigure: true
+
+  Psr\Log\:
+    resource: '../../vendor/psr/log/src/*'
+
+  Psr\Log\LoggerInterface:
+    alias: 'Psr\Log\NullLogger'

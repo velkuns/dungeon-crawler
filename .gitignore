@@ -1,0 +1,22 @@
+#~ Composer
+composer.phar
+composer.lock
+/vendor/
+
+#~ App secrets
+config/secrets/*
+!config/secrets/.gitkeep
+
+#~ Statics
+node_modules/
+web/assets
+yarn.lock
+yarn-error.log
+
+#~ Application
+var/*
+!var/.gitkeep
+
+#~ CI
+/build/
+.phpunit.result.cache
