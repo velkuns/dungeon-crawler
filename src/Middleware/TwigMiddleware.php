@@ -39,7 +39,7 @@ class TwigMiddleware implements MiddlewareInterface
         private readonly Router $router,
         private readonly Twig\Environment $twig,
         private readonly array $twigPaths = [],
-        private readonly string $webAssetsPath = ''
+        private readonly string $webAssetsPath = '',
     ) {}
 
     /**

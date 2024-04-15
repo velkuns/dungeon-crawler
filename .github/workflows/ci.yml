@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php-versions: [ '8.1', '8.2', '8.3' ]
+        php-versions: [ '8.3' ]
 
     steps:
       - uses: actions/checkout@v3
@@ -60,9 +60,6 @@ jobs:
         run: |
           sed -i 's+'$GITHUB_WORKSPACE'+/github/workspace+g' build/reports/phpunit/clover.xml
           sed -i 's+'$GITHUB_WORKSPACE'+/github/workspace+g' build/reports/phpunit/unit.xml
-
-      - name: PHP 8.1 Compatibility
-        run: make php81compatibility
 
       - name: PHP 8.3 Compatibility
         run: make php83compatibility

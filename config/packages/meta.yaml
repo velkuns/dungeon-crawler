@@ -1,14 +1,14 @@
 parameters:
 
   meta.config:
-    title: 'Eureka'
+    title:   'Dungeon Crawler'
     charset: 'utf-8'
 
     app:
-      name_short: ''
-      name_full: 'Eureka Web App'
+      name_short: 'DC'
+      name_full: 'Dungeon Crawler'
 
-    description: 'This application is an template web application based on Eureka Framework component'
+    description: 'This application is a Dungeon Crawler'
     keywords:    'eureka, web, application, template, component, php, framework'
     author:      'Romain Cottard'
     version:     '%app.version%'

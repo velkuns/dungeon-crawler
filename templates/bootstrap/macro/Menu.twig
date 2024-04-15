@@ -1,5 +1,0 @@
-{% macro simple(menu, item) %}
-    <li class="nav-item">
-        <a class="nav-link {{ item.isActive() ? 'active' : ''}}" aria-current="page" href="{{ item.getUri() }}">{{ item.getName() }}</a>
-    </li>
-{% endmacro %}

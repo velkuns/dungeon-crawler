@@ -11,7 +11,6 @@ validate:
 
 install:
 	$(call header,Composer Install)
-	@composer global require maglnet/composer-require-checker
 	@composer install
 
 update:
@@ -39,7 +38,7 @@ build/reports/phpstan:
 #~ main commands
 deps: composer.json
 	$(call header,Checking Dependencies)
-	@XDEBUG_MODE=off composer-require-checker check
+	@XDEBUG_MODE=off ./vendor/bin/composer-require-checker check
 
 phpcs: vendor/bin/php-cs-fixer build/reports/phpcs
 	$(call header,Checking Code Style)
@@ -48,10 +47,6 @@ phpcs: vendor/bin/php-cs-fixer build/reports/phpcs
 phpcsf: vendor/bin/php-cs-fixer
 	$(call header,Fixing Code Style)
 	@./vendor/bin/php-cs-fixer fix -v
-
-php81compatibility: vendor/bin/phpstan build/reports/phpstan
-	$(call header,Checking PHP 8.1 compatibility)
-	@XDEBUG_MODE=off ./vendor/bin/phpstan analyse --configuration=./ci/php81-compatibility.neon --error-format=table
 
 php83compatibility: vendor/bin/phpstan build/reports/phpstan
 	$(call header,Checking PHP 8.3 compatibility)

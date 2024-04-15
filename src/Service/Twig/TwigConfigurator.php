@@ -25,7 +25,7 @@ class TwigConfigurator
         private readonly Twig\Environment $twig,
         private readonly array $twigPaths,
         Router $router,
-        string $webAssetsPath
+        string $webAssetsPath,
     ) {
         $this->configurePaths($twigPaths);
         $this->configureHelper($router, $webAssetsPath);

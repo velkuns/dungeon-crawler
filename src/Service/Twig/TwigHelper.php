@@ -38,7 +38,7 @@ class TwigHelper
             $json = \json_decode(
                 (string) \file_get_contents($manifestFile),
                 true,
-                flags: \JSON_THROW_ON_ERROR
+                flags: \JSON_THROW_ON_ERROR,
             );
 
             $this->assetsManifest = $json;

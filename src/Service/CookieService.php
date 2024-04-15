@@ -41,7 +41,7 @@ class CookieService
         string $path = '/',
         bool $isSecure = true,
         bool $isHttpOnly = true,
-        string $sameSite = 'None' // None || Lax  || Strict
+        string $sameSite = 'None', // None || Lax  || Strict
     ) {
         $this->dateNow = $dateNow;
 
