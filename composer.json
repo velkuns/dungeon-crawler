@@ -1,6 +1,6 @@
 {
-  "name": "eureka/eureka-appplication-web",
-  "description": "Web Application Eureka Framework - Template App",
+  "name": "velkuns/dungeon-crawler",
+  "description": "Dungeon Crawler - Web Application",
   "minimum-stability": "stable",
   "type": "project",
   "license": "MIT",

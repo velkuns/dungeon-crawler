@@ -8,3 +8,13 @@ home:
     methods:    [GET]
     defaults:
         authenticationRequired: false
+
+# ======================================================================================================================
+# =                                                 API                                                                =
+# ======================================================================================================================
+api_ping:
+    path: /api/ping
+    controller: Application\Controller\Api\PingController::ping
+    methods: [ GET ]
+    defaults:
+        authenticationRequired: false

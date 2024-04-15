@@ -1,9 +1,13 @@
 parameters:
+  web.middleware.renderer: 'Application\Middleware\TwigMiddleware'
+  api.middleware.renderer: 'Application\Middleware\JsonMiddleware'
+
+  env(EKA_MIDDLEWARE_RENDERER): '%web.middleware.renderer%' # Default middleware renderer for app
 
   app.middleware:
     timeLogger:     'Eureka\Kernel\Http\Middleware\ResponseTimeLoggerMiddleware'
     errorWeb:       'Eureka\Kernel\Http\Middleware\ErrorMiddleware'
-    twig:           'Application\Middleware\TwigMiddleware'
+    api:            '%env(EKA_MIDDLEWARE_RENDERER)%'
     router:         'Eureka\Kernel\Http\Middleware\RouterMiddleware'
     rateLimiter:    'Eureka\Kernel\Http\Middleware\RateLimiterMiddleware'
     controller:     'Eureka\Kernel\Http\Middleware\ControllerMiddleware'

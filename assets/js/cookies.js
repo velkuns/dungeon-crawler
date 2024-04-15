@@ -1,4 +1,4 @@
-const prefix = 'eureka-app-web';
+const prefix = 'dungeon-crawler';
 
 function set(name, value, expireDays) {
     const expireDate = new Date();
@@ -15,7 +15,7 @@ function get(name) {
             if (end === -1) {
                 end = document.cookie.length;
             }
-            return unescape(document.cookie.substring(start, end));
+            return decodeURI(document.cookie.substring(start, end));
         }
     }
     return '';

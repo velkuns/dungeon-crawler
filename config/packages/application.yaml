@@ -23,17 +23,30 @@ services:
     resource: '../../src/Controller/Web'
     public: true # services called in ControllerMiddleware
     calls:
-      - [ 'setTwig', [ '@twig' ] ]
-      - [ 'setRouter', [ '@router' ] ]
-      - [ 'setResponseFactory', [ '@response_factory' ] ]
-      - [ 'setRequestFactory', [ '@request_factory' ] ]
-      - [ 'setServerRequestFactory', [ '@server_request_factory' ] ]
-      - [ 'setStreamFactory', [ '@stream_factory' ] ]
-      - [ 'setUriFactory', [ '@uri_factory' ] ]
-      - [ 'setSession', [ '@session' ] ]
-      - [ 'setMenuConfig', [ '%menu.config.left%', '%menu.cookie_state_name%', '%menu.config.right%' ] ]
-      - [ 'setMetaConfig', [ '%meta.config%' ] ]
-      - [ 'setRootDirectory', [ '%kernel.directory.root%' ] ]
+      - setTwig: [ '@twig' ]
+      - setRouter: [ '@router' ]
+      - setResponseFactory: [ '@response_factory' ]
+      - setRequestFactory: [ '@request_factory' ]
+      - setServerRequestFactory: [ '@server_request_factory' ]
+      - setStreamFactory: [ '@stream_factory' ]
+      - setUriFactory: [ '@uri_factory' ]
+      - setSession: [ '@session' ]
+      - setMenuConfig: [ '%menu.config.left%', '%menu.cookie_state_name%', '%menu.config.right%' ]
+      - setMetaConfig: [ '%meta.config%' ]
+      - setRootDirectory: [ '%kernel.directory.root%' ]
+
+  #~ Application controllers
+  Application\Controller\Api\:
+    resource: '../../src/Controller/Api'
+    public: true # services called in ControllerMiddleware
+    calls:
+      - setRouter: [ '@router' ]
+      - setResponseFactory: [ '@response_factory' ]
+      - setRequestFactory: [ '@request_factory' ]
+      - setServerRequestFactory: [ '@server_request_factory' ]
+      - setStreamFactory: [ '@stream_factory' ]
+      - setUriFactory: [ '@uri_factory' ]
+      - setSession: [ '@session' ]
 
   #~ Application Domain
   Application\Domain\:
